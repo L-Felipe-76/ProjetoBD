@@ -1,0 +1,58 @@
+create table clientes(
+id_cliente serial primary key,
+nome varchar(300) not null,
+email varchar(150) not null
+);
+
+create table produtos(
+id_produto serial primary key,
+nome varchar(150) not null,
+preco numeric not null
+);
+
+create table pedidos(
+id_pedido serial primary key,
+id_cliente int not null references clientes(id_cliente),
+id_produto int not null references produtos(id_produto),
+valor_total numeric not null,
+mesa int not null,
+hora_pedido time not null,
+data_pedido date not null
+);
+
+
+insert into clientes(nome, email)
+values ('Otto', 'Otto@email.com'),
+('Luiz', 'Luiz@gmail.com'),
+('Victor', 'Victor@hotmail.com'),
+('Marcos', 'Marcos@opera.com.br'),
+('Antonio', 'Antonio@webmail.com.br');
+
+insert into produtos(nome, preco)
+values ('Frango Massivo', 20.50);
+insert into produtos(nome, preco)
+values ('Steak Destruidor', 35.90);
+insert into produtos(nome, preco)
+values ('Vegan Smash', 27.80);
+insert into produtos(nome, preco)
+values ('Jatoba 500ml', 7.00);
+insert into produtos(nome, preco)
+values ('Suco de Laranja', 6.00);
+
+insert into pedidos(id_cliente, id_produto, valor_total, mesa, hora_pedido, data_pedido)
+values (1, 2, 35.90, 2, '1900', '20240312');
+insert into pedidos(id_cliente, id_produto, valor_total, mesa, hora_pedido, data_pedido)
+values (2, 1, 20.50, 4, '1800', '20240313');
+insert into pedidos(id_cliente, id_produto, valor_total, mesa, hora_pedido, data_pedido)
+values (3, 5, 6.00, 1, '1935', '20240315');
+insert into pedidos(id_cliente, id_produto, valor_total, mesa, hora_pedido, data_pedido)
+values (4, 3, 27.80, 2, '1744', '20240412');
+insert into pedidos(id_cliente, id_produto, valor_total, mesa, hora_pedido, data_pedido)
+values (5, 4, 7.00, 3, '2110', '20240418');
+
+
+select * from clientes;
+select * from produtos;
+select * from pedidos;
+select  * from pedidos where id_produto = 1;
+select * from pedidos where mesa = 2;
